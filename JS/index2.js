@@ -1,31 +1,31 @@
-const apiUrl = 'http://localhost:8801/produto';
+const apiUrl = 'http://localhost:8801/cliente';
 
 document.getElementById('getDataBtn').addEventListener('click', function() {
-    const produtoId = document.getElementById('produtoId').value;
+    const clienteId = document.getElementById('clienteId').value;
 
-    if(produtoId.length != 0) {
-        fetch(`${apiUrl}/${produtoId}`)
+    if(clienteId.length != 0) {
+        fetch(`${apiUrl}/${clienteId}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Produto não encontrado, favor inserir um id válido.`);
+                    throw new Error(`cliente não encontrado, favor inserir um id válido.`);
                 }
                 return response.json();
             })
             .then(data => {
                 document.getElementById('result').value = JSON.stringify(data, null, 2);
-                document.getElementById('nmProdutoDisplay').value = data.nmProduto;
-                document.getElementById('vlProdutoDisplay').value = data.vlProduto;
-                document.getElementById('idProdutoDisplay').value = data.id;
+                document.getElementById('nmclienteDisplay').value = data.nmcliente;
+                document.getElementById('cdempresaDisplay').value = data.cdempresa;
+                document.getElementById('idclienteDisplay').value = data.id;
             })
             .catch(error => {
                 document.getElementById('result').value = `Erro: ${error.message}`;
             });
     }
-    else if(produtoId.length == 0) {
+    else if(clienteId.length == 0) {
         fetch(`${apiUrl}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Não existe nenhum produto disponível no momento ${response.status}`);
+                    throw new Error(`Não existe nenhum cliente disponível no momento ${response.status}`);
                 }
                 return response.json();
             })
@@ -39,13 +39,13 @@ document.getElementById('getDataBtn').addEventListener('click', function() {
 });
 
 document.getElementById('sendDataBtn').addEventListener('click', function() {
-    const nmProduto = document.getElementById('nmProduto').value;
-    const vlProduto = document.getElementById('vlProduto').value;
+    const nmCliente = document.getElementById('nmClientePost').value;
+    const cdEmpresa = document.getElementById('cdEmpresaPost').value;
 
-    if(nmProduto && vlProduto) {
+    if(nmCliente && cdEmpresa) {
         const payload = {
-            nmProduto: nmProduto,
-            vlProduto: parseInt(vlProduto, 10)
+            nmCliente: nmCliente,
+            cdEmpresa: cdEmpresa
         };
 
         fetch(apiUrl, {
@@ -74,17 +74,17 @@ document.getElementById('sendDataBtn').addEventListener('click', function() {
 });
 
 document.getElementById('updateDataBtn').addEventListener('click', function() {
-    const produtoId = document.getElementById('idProdutoDisplayUpd').value;  // Ajuste no ID do produto
-    const nmProduto = document.getElementById('nmProdutoDisplayUpd').value;  // Ajuste no nome do produto
-    const vlProduto = document.getElementById('vlProdutoDisplayUpd').value;  // Ajuste no valor do produto
+    const clienteId = document.getElementById('idclienteDisplayUpd').value;  // Ajuste no ID do cliente
+    const nmCliente = document.getElementById('nmclienteDisplayUpd').value;  // Ajuste no nome do cliente
+    const cdEmpresa = document.getElementById('cdempresaDisplayUpd').value;  // Ajuste no valor do cliente
 
-    if(produtoId && nmProduto && vlProduto) {
+    if(clienteId && nmCliente && cdEmpresa) {
         const payload = {
-            nmProduto: nmProduto,
-            vlProduto: parseInt(vlProduto, 10)
+            nmCliente: nmCliente,
+            cdEmpresa: cdEmpresa,
         };
 
-        fetch(`${apiUrl}/${produtoId}`, {
+        fetch(`${apiUrl}/${clienteId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -93,12 +93,12 @@ document.getElementById('updateDataBtn').addEventListener('click', function() {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Erro ao atualizar produto: ${response.status}`);
+                throw new Error(`Erro ao atualizar cliente: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            alert('Produto atualizado com sucesso!');
+            alert('cliente atualizado com sucesso!');
             console.log('Resposta da API: ', data);
         })
         .catch(error => {
@@ -110,11 +110,11 @@ document.getElementById('updateDataBtn').addEventListener('click', function() {
 });
 
 document.getElementById('deleteDataBtn').addEventListener('click', function() {
-    const produtoId = document.getElementById('idProdutoDisplayDel').value;
+    const clienteId = document.getElementById('idclienteDisplayDel').value;
 
-    if(produtoId) {
-        if (confirm(`Tem certeza que deseja excluir o produto com ID ${produtoId}?`)) {
-            fetch(`${apiUrl}/${produtoId}`, {
+    if(clienteId) {
+        if (confirm(`Tem certeza que deseja excluir o cliente com ID ${clienteId}?`)) {
+            fetch(`${apiUrl}/${clienteId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -122,16 +122,16 @@ document.getElementById('deleteDataBtn').addEventListener('click', function() {
             })
             .then(response => {
                 if(!response.ok) {
-                    throw new Error(`Erro ao deletar produto: ${response.status}`);
+                    throw new Error(`Erro ao deletar cliente: ${response.status}`);
                 }
 
-                alert('Produto deletado com suceeso')
+                alert('cliente deletado com suceeso')
             })
             .catch(error => {
                 alert(`Erro: ${error.message}`);
             })
         }
     } else {
-        alert('Por favor, insira um valor de ID de produto válido para deletar');
+        alert('Por favor, insira um valor de ID de cliente válido para deletar');
     }
 })

@@ -1,8 +1,8 @@
-package com.teste.teste.controller;
+package com.spring.demo.controller;
 
-import com.teste.teste.Model.ProductModel;
-import com.teste.teste.dto.ProductRecordDto;
-import com.teste.teste.repository.ProductRepository;
+import com.spring.demo.Model.ProductModel;
+import com.spring.demo.dto.ProductRecordDto;
+import com.spring.demo.repository.ProductRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

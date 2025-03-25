@@ -1,6 +1,6 @@
-package com.teste.teste.repository;
+package com.spring.demo.repository;
 
-import com.teste.teste.Model.ProductModel;
+import com.spring.demo.Model.ProductModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

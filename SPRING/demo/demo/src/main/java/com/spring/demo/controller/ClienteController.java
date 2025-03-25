@@ -1,8 +1,8 @@
-package com.teste.teste.controller;
+package com.spring.demo.controller;
 
-import com.teste.teste.Model.ClienteModel;
-import com.teste.teste.dto.ClienteRecordDto;
-import com.teste.teste.repository.ClienteRepository;
+import com.spring.demo.Model.ClienteModel;
+import com.spring.demo.dto.ClienteRecordDto;
+import com.spring.demo.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class ClienteController {
         if (cliente0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado");
         }
-        var clienteModel = new ClienteModel();
+        var clienteModel = cliente0.get();
         BeanUtils.copyProperties(clienteRecordDto, clienteModel);
         return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.save(clienteModel));
     }

@@ -1,4 +1,4 @@
-package com.teste.teste.Model;
+package com.spring.demo.Model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
